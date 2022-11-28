@@ -1,5 +1,5 @@
 const SERVER_API_URL_DEV = 'https://localhost:7257/api/Astronauts';
-const SERVER_API_URL_PROD = 'https://aspreactastronauts.azurewebsites.net';
+const SERVER_API_URL_PROD = 'https://aspreactastronauts.azurewebsites.net/api/Astronauts';
 
 const endpoints = {
     GET_ALL_ASTRONAUTS: 'GetAstronauts',
