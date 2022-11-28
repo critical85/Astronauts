@@ -61,7 +61,9 @@
     <Folder Include="PublishProfiles" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Astronauts.sql" />
+    <Build Include="Tables\Astronauts.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\Astronauts.Database.publish.xml" />
