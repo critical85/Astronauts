@@ -14,7 +14,7 @@ builder.Services.AddCors(options => {
             builder
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .WithOrigins("http://localhost:3000", "https://appname.azurestaticapps.net");
+            .WithOrigins("http://localhost:3000", "https://wonderful-pond-0be77c910.2.azurestaticapps.net");
         });
 });
 
