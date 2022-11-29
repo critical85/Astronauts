@@ -22,7 +22,7 @@ export default function App() {
             Astronauti
           </h1>
           <div className="mt-4">
-            Drazí pozemšťané, výtejte v projektu jednosměrné cesty na Pluto. 
+            Drazí pozemšťané, vítejte v projektu jednosměrné cesty na Pluto. 
           </div>
           <div className="mt-4">
             <CreateAstronautForm createAstronaut={createAstronaut} />
