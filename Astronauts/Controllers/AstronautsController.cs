@@ -19,13 +19,13 @@ namespace Astronauts.WebApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetAstronauts")]
+        [HttpGet]
         public IEnumerable<AstronautDTO> GetAll()
         {
             return _mapper.Map<IList<AstronautDTO>>(_astronautService.GetAll());
         }
 
-        [HttpPost("InsertAstronaut")]
+        [HttpPost]
         public ActionResult Insert(AstronautDTO astronaut)
         {
             if (astronaut.AstronautId != 0)
@@ -35,12 +35,12 @@ namespace Astronauts.WebApi.Controllers
             return Ok(_mapper.Map<AstronautDTO>(_astronautService.Insert(_mapper.Map<Astronaut>(astronaut))));
         }
 
-        [HttpPost("DeleteAstronaut")]
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             if (_astronautService.Delete(id))
             {
-                return Ok(null);
+                return Ok("Delete successful");
             }
             else
             {

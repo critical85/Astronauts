@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import "./DeleteAstronautConfirmModal.css";
+import { deleteAstronaut } from "./../api/AstronautsApi";
 
 function DeleteAstronautConfirm(props) {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-
-    props.deleteAstronaut(props.astronaut.astronautId);
+    await deleteAstronaut(props.astronaut.astronautId);
+    props.loadAstronauts();
     setShow(false);
-  };
+  }
 
   return (
     <>
-      <img style={{cursor:'pointer'}} src={require('./../icons/removeIcon.png')} onClick={handleShow} />
+      <img
+        className="delete-icon"
+        src={require("./../icons/removeIcon.png")}
+        onClick={handleShow}
+      />
 
       <Modal
         show={show}
@@ -26,11 +31,18 @@ function DeleteAstronautConfirm(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Opravdu si přejete astronauta {props.astronaut.firstName} {props.astronaut.lastName} smazat?</Modal.Title>
+          <Modal.Title>
+            Opravdu si přejete astronauta {props.astronaut.firstName}{" "}
+            {props.astronaut.lastName} smazat?
+          </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}> Smazat </Button>
-          <Button variant="secondary" onClick={handleClose}> Zavřít </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Smazat
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Zavřít
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

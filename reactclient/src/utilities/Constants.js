@@ -1,24 +1,22 @@
-const SERVER_API_URL_DEV = 'https://localhost:7257/api/Astronauts';
-const SERVER_API_URL_PROD = 'https://aspreactastronauts.azurewebsites.net/api/Astronauts';
+const SERVER_API_URL_DEV = "https://localhost:7257/api";
+const SERVER_API_URL_PROD = "https://aspreactastronauts.azurewebsites.net/api";
 
 const endpoints = {
-    GET_ALL_ASTRONAUTS: 'GetAstronauts',
-    INSERT_ASTRONAUT: 'InsertAstronaut',
-    DELETE_ASTRONAUT_BY_ID: 'DeleteAstronaut?id='
-}
+  BASE_ASTRONAUTS: "Astronauts",
+};
 
 const dev_urls = {
-    GET_ALL_ASTRONAUTS: `${SERVER_API_URL_DEV}/${endpoints.GET_ALL_ASTRONAUTS}`,
-    INSERT_ASTRONAUT: `${SERVER_API_URL_DEV}/${endpoints.INSERT_ASTRONAUT}`,
-    DELETE_ASTRONAUT_BY_ID: `${SERVER_API_URL_DEV}/${endpoints.DELETE_ASTRONAUT_BY_ID}`
+  GET_ALL_ASTRONAUTS: `${SERVER_API_URL_DEV}/${endpoints.BASE_ASTRONAUTS}`,
+  INSERT_ASTRONAUT: `${SERVER_API_URL_DEV}/${endpoints.BASE_ASTRONAUTS}`,
+  DELETE_ASTRONAUT_BY_ID: `${SERVER_API_URL_DEV}/${endpoints.BASE_ASTRONAUTS}/`,
 };
 
 const prod_urls = {
-    GET_ALL_ASTRONAUTS: `${SERVER_API_URL_PROD}/${endpoints.GET_ALL_ASTRONAUTS}`,
-    INSERT_ASTRONAUT: `${SERVER_API_URL_PROD}/${endpoints.INSERT_ASTRONAUT}`,
-    DELETE_ASTRONAUT_BY_ID: `${SERVER_API_URL_PROD}/${endpoints.DELETE_ASTRONAUT_BY_ID}`
+  GET_ALL_ASTRONAUTS: `${SERVER_API_URL_PROD}/${endpoints.BASE_ASTRONAUTS}`,
+  INSERT_ASTRONAUT: `${SERVER_API_URL_PROD}/${endpoints.BASE_ASTRONAUTS}`,
+  DELETE_ASTRONAUT_BY_ID: `${SERVER_API_URL_PROD}/${endpoints.BASE_ASTRONAUTS}/`,
 };
 
-const Constants = process.env.NODE_ENV === 'development' ? dev_urls : prod_urls;
+const Constants = process.env.NODE_ENV === "development" ? dev_urls : prod_urls;
 
 export default Constants;
