@@ -37,7 +37,6 @@ namespace Astronauts.WebApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
         }
 
         [HttpDelete("{id:int}")]
