@@ -11,9 +11,13 @@ function DeleteAstronautConfirm(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await deleteAstronaut(props.astronaut.astronautId);
-    props.loadAstronauts();
-    setShow(false);
+    try {
+      await deleteAstronaut(props.astronaut.astronautId);
+      props.loadAstronauts();
+      setShow(false);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

@@ -1,5 +1,5 @@
-﻿using Astronauts.Core.Common;
-using Astronauts.Core.Entities;
+﻿using Astronauts.Core.Entities;
+using Astronauts.Core.Exceptions.Astronauts;
 using Astronauts.Core.Repositories.Astronauts;
 
 namespace Astronauts.Core.Services.Astronauts
@@ -24,9 +24,15 @@ namespace Astronauts.Core.Services.Astronauts
 
         public Astronaut Insert(Astronaut astronaut)
         {
-            astronaut.AstronautId = Constants.ZeroIdForInserting;
-            _astronautsRepository.Insert(astronaut);
-            return astronaut;
+            if (astronaut.AstronautId == 0)
+            {
+                _astronautsRepository.Insert(astronaut);
+                return astronaut;
+            }
+            else
+            {
+                throw new AstronautInsertException("Astronauts ID must be 0");
+            }
         }
 
         public bool Delete(int id)

@@ -2,7 +2,6 @@ import Constants from "./../utilities/Constants";
 
 async function getAstronauts() {
   const url = Constants.GET_ALL_ASTRONAUTS;
-  console.log(url);
   const response = await fetch(url, {
     method: "GET",
   });

@@ -24,9 +24,13 @@ function CreateAstronautForm(props) {
       superPower: formData.superPower,
     };
 
-    await createAstronaut(astronautToCreate);
-    setShow(false);
-    props.loadAstronauts();
+    try {
+      await createAstronaut(astronautToCreate);
+      setShow(false);
+      props.loadAstronauts();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

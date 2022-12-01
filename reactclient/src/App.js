@@ -3,23 +3,33 @@ import { format } from "date-fns";
 import CreateAstronautForm from "./components/CreateAstronautFormModal";
 import DeleteAstronautConfirm from "./components/DeleteAstronautConfirmModal";
 import { getAstronauts } from "./api/AstronautsApi";
+import Loader from "./components/Loader";
+import "./App.css";
 
 export default function App() {
+  const [astronauts, setAstronauts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   async function loadAstronauts() {
-    const astronauts = await getAstronauts();
-    setAstronauts(astronauts);
+    setLoading(true);
+    try {
+      const astronauts = await getAstronauts();
+      setAstronauts(astronauts);
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
   }
 
   useEffect(() => {
     loadAstronauts();
   }, []);
 
-  const [astronauts, setAstronauts] = useState([]);
-
   return (
     <div className="container">
       <div className="row min-vh-100">
         <div className="col d-flex flex-column justify-content-center align-items-center">
+          {loading && <Loader></Loader>}
           <h1>Astronauti</h1>
           <div className="mt-4">
             Drazí pozemšťané, vítejte v projektu jednosměrné cesty na Pluto.
@@ -38,24 +48,25 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                {astronauts.map((astronaut) => (
-                  <tr key={astronaut.astronautId}>
-                    <td>{astronaut.firstName}</td>
-                    <td>{astronaut.lastName}</td>
-                    <td>
-                      {format(new Date(astronaut.birthDate), "dd.M.yyyy")}
-                    </td>
-                    <td>
-                      {astronaut.superPower}
-                      <span className="float-end">
-                        <DeleteAstronautConfirm
-                          loadAstronauts={loadAstronauts}
-                          astronaut={astronaut}
-                        />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {!loading &&
+                  astronauts.map((astronaut) => (
+                    <tr key={astronaut.astronautId}>
+                      <td>{astronaut.firstName}</td>
+                      <td>{astronaut.lastName}</td>
+                      <td>
+                        {format(new Date(astronaut.birthDate), "dd.M.yyyy")}
+                      </td>
+                      <td>
+                        {astronaut.superPower}
+                        <span className="float-end">
+                          <DeleteAstronautConfirm
+                            loadAstronauts={loadAstronauts}
+                            astronaut={astronaut}
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

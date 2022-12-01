@@ -1,0 +1,5 @@
+.column-loader {
+  column-span: "4";
+  display: flex;
+  justify-content: center;
+}

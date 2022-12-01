@@ -1,4 +1,5 @@
 ﻿using Astronauts.Core.Entities;
+using Astronauts.Core.Exceptions.Astronauts;
 using Astronauts.Core.Services.Astronauts;
 using Astronauts.WebApi.EntitiesDTO;
 using AutoMapper;
@@ -28,11 +29,15 @@ namespace Astronauts.WebApi.Controllers
         [HttpPost]
         public ActionResult Insert(AstronautDTO astronaut)
         {
-            if (astronaut.AstronautId != 0)
+            try
             {
-                return BadRequest("Astronauts ID must be 0");
+                return Ok(_mapper.Map<AstronautDTO>(_astronautService.Insert(_mapper.Map<Astronaut>(astronaut))));
             }
-            return Ok(_mapper.Map<AstronautDTO>(_astronautService.Insert(_mapper.Map<Astronaut>(astronaut))));
+            catch (AstronautInsertException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpDelete("{id:int}")]
